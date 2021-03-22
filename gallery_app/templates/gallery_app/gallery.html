@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: top;
+            background-image:url(https://wallpaperaccess.com/full/877568.jpg);
+            width: 100%;
+            height: 100%;
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+        .image-thumbnail {
+            height: 200px;
+            border-radius: 15px 15px 15px 15px;
+        }
+        .card-body{
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+        .a .btn .btn-secondary:hover {
+            background: #109177;
+        }
+    </style>
+</head>
+<body>
+    {% include 'gallery_app/navbar.html' %}
+    
+      {% block content %}
+      
+      <div class="container" style="padding-top: 100px">
+          <div class="row">
+              <div class="col md-9">
+                  <div class="row">
+                      {% for photo in photos %}  
+                      <div class="col-md-3 my-2" >
+                        <div class="card h-100" style="width: 18rem; border-radius: 15px 15px 15px 15px;">
+                            <img class="image-thumbnail"
+                              src="{{photo.image.url}}"
+                              class="card-img-top"
+                              alt="..."
+
+                            />
+                            <div class="card-body">
+                              <h5 class="card-title" style="font-weight: 700;">{{photo.title}}</h5>
+                              <p class="card-text">
+                                {{photo.description}}
+                              </p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item">Category: {{photo.category}}</li>
+                            </ul>
+                            <div class="card-body">
+                              <a href="{% url 'view-photo' photo.id %}" class="btn btn-secondary" type="button"style="display: block; background: #1abc9c;
+                              font-size: 18px;
+                              text-align: center;
+                              font-style: normal;
+                              width: 100%;
+                              border: 1px solid #16a085;
+                              border-width: 1px 1px 3px;
+                              margin-bottom: 10px;">View photo</a>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+      {% endblock content %}
+</body>
+</html>

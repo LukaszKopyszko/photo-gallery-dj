@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    {% extends 'gallery_app/main.html' %}
+    {% block content %} 
+    
+    <form action="" method="POST" class="form-style-5">
+        <h1>LOGIN</h1>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Login" class='button'>
+        <p style="text-align: center;">Don't have an account?<a href="{% url 'register' %}"> Register</a></p>
+    </form>
+    
+
+    
+    {% endblock content %}
+    
+</body>
+</html>

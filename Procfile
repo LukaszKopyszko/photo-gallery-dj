@@ -1,0 +1,1 @@
+web: gunicorn photo_gallery_project.wsgi --log-file -

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: top;
+            background-image:url(https://i.pinimg.com/originals/22/9a/4c/229a4c6749127408458ff4df71841dd9.jpg);
+            width: 100%;
+            height: 100%;
+            font-family: 'Acme', sans-serif;
+        }
+        .image-thumbnail {
+            height: 200px;
+        }
+        .container {
+            max-width: 550px;
+            margin: auto;
+            background-color: whitesmoke;
+            -webkit-box-shadow: 2px 2px 13px -4px black;
+            box-shadow: 0 0 1em black;
+            border-radius: 5px 5px 5px 5px;
+        }
+        .form-style-5{
+            max-width: 500px;
+            padding: 10px 20px;
+            background: #f4f7f8;
+            margin: 10px auto;
+            padding: 20px;
+            background: #f4f7f8;
+            border-radius: 8px;
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+        .form-style-5 fieldset{
+            border: none;
+        }
+        .form-style-5 legend {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        .form-style-5 label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-style-5 input[type="text"],
+        .form-style-5 input[type="date"],
+        .form-style-5 input[type="password"],
+        .form-style-5 input[type="email"],
+        .form-style-5 input[type="number"],
+        .form-style-5 input[type="search"],
+        .form-style-5 input[type="time"],
+        .form-style-5 input[type="url"],
+        .form-style-5 textarea,
+        .form-style-5 select {
+            font-family: Georgia, "Times New Roman", Times, serif;
+            background: rgba(255,255,255,.1);
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            margin: 0;
+            outline: 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box; 
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box; 
+            background-color: #e8eeef;
+            color:#8a97a0;
+            -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+            margin-bottom: 30px;
+        }
+        .form-style-5 input[type="text"]:focus,
+        .form-style-5 input[type="date"]:focus,
+        .form-style-5 input[type="datetime"]:focus,
+        .form-style-5 input[type="email"]:focus,
+        .form-style-5 input[type="number"]:focus,
+        .form-style-5 input[type="search"]:focus,
+        .form-style-5 input[type="time"]:focus,
+        .form-style-5 input[type="url"]:focus,
+        .form-style-5 textarea:focus,
+        .form-style-5 select:focus{
+            background: #d2d9dd;
+        }
+        .form-style-5 select{
+            -webkit-appearance: menulist-button;
+            height:35px;
+        }
+        .form-style-5 .number {
+            background: #1abc9c;
+            color: #fff;
+            height: 30px;
+            width: 30px;
+            display: inline-block;
+            font-size: 0.8em;
+            margin-right: 4px;
+            line-height: 30px;
+            text-align: center;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+            border-radius: 15px 15px 15px 0px;
+        }
+        
+        .form-style-5 input[type="submit"],
+        .form-style-5 input[type="button"]
+        {
+            position: relative;
+            display: block;
+            padding: 19px 39px 18px 39px;
+            color: #FFF;
+            margin: 0 auto;
+            background: #1abc9c;
+            font-size: 18px;
+            text-align: center;
+            font-style: normal;
+            width: 100%;
+            border: 1px solid #16a085;
+            border-width: 1px 1px 3px;
+            margin-bottom: 10px;
+        }
+        .form-style-5 input[type="submit"]:hover,
+        .form-style-5 input[type="button"]:hover
+        {
+            background: #109177;
+        }
+    </style>
+</head>
+<body>
+    {% include 'gallery_app/navbar.html' %}
+       
+      {% block content %}
+      <div style="padding-top: 100px;">
+      <form action="" method="POST" class="form-style-5" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <h1>ADD PHOTO</h1>
+        <div>
+            <label for="title">Title</label>
+            <input type="text" placeholder="Enter title" name="title">
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input type="text" placeholder="Enter description" name="description">
+        </div>
+        <div>
+            <label>Select a category</label>
+            <select name="category" class="form-control">
+                <option value='none'>Select a category...</option>
+
+                {% for category in categories %}
+                <option value='{{category.id}}'>{{category.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Create a new category</label>
+            <input name="category_new" type="text" placeholder="Create a new category"
+                class="form-control">
+        </div>
+        <div>
+            <label for="image">Upload image</label>
+            <input type="file" class="form-control-file" name="image">
+        </div>
+        
+        <input type="submit" value="Add photo" class='button'>
+    </form>
+</div>
+
+      {% endblock content %}
+</body>
+</html>
